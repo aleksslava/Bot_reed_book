@@ -27,20 +27,20 @@ def create_bookmarks_keyboard(*args: int) -> InlineKeyboardMarkup:
         return kb_builder.as_markup()
 
 
-    def create_edit_keyboard(*args: int) -> InlineKeyboardMarkup:
-        # Создаем объект клавиатуры
-        kb_builder = InlineKeyboardBuilder()
-        # Наполняем клавиатуру кнопками-закладками в порядке возрастания
-        for button in sorted(args):
-            kb_builder.row(InlineKeyboardButton(
-                text=f'{LEXICON["del"]} {button} - {book[button][:100]}',
-                callback_data=f'{button}del'
-            ))
-        # Добавляем в конец клавиатуры кнопку "Отменить"
-        kb_builder.row(
-            InlineKeyboardButton(
-                text=LEXICON['cancel'],
-                callback_data='cancel'
-            )
+def create_edit_keyboard(*args: int) -> InlineKeyboardMarkup:
+    # Создаем объект клавиатуры
+    kb_builder = InlineKeyboardBuilder()
+    # Наполняем клавиатуру кнопками-закладками в порядке возрастания
+    for button in sorted(args):
+        kb_builder.row(InlineKeyboardButton(
+            text=f'{LEXICON["del"]} {button} - {book[button][:100]}',
+            callback_data=f'{button}del'
+        ))
+    # Добавляем в конец клавиатуры кнопку "Отменить"
+    kb_builder.row(
+        InlineKeyboardButton(
+            text=LEXICON['cancel'],
+            callback_data='cancel'
         )
-        return kb_builder.as_markup()
+    )
+    return kb_builder.as_markup()
